@@ -73,8 +73,7 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.button14 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.button15 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -491,10 +490,9 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.button15);
             this.groupBox8.Controls.Add(this.label12);
             this.groupBox8.Controls.Add(this.textBox3);
-            this.groupBox8.Controls.Add(this.textBox8);
-            this.groupBox8.Controls.Add(this.label17);
             this.groupBox8.Controls.Add(this.button12);
             this.groupBox8.Controls.Add(this.button13);
             this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -509,7 +507,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label12.Location = new System.Drawing.Point(30, 101);
+            this.label12.Location = new System.Drawing.Point(29, 37);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(89, 16);
             this.label12.TabIndex = 23;
@@ -519,16 +517,17 @@
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.textBox3.Location = new System.Drawing.Point(33, 120);
+            this.textBox3.Location = new System.Drawing.Point(28, 56);
+            this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(180, 20);
+            this.textBox3.Size = new System.Drawing.Size(198, 27);
             this.textBox3.TabIndex = 22;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(33, 155);
+            this.button12.Location = new System.Drawing.Point(28, 158);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(79, 33);
+            this.button12.Size = new System.Drawing.Size(90, 33);
             this.button12.TabIndex = 18;
             this.button12.Text = "YENİ EKLE";
             this.button12.UseVisualStyleBackColor = true;
@@ -536,9 +535,9 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(133, 155);
+            this.button13.Location = new System.Drawing.Point(135, 158);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(80, 33);
+            this.button13.Size = new System.Drawing.Size(91, 33);
             this.button13.TabIndex = 17;
             this.button13.Text = "ÖDE";
             this.button13.UseVisualStyleBackColor = true;
@@ -586,23 +585,15 @@
             this.label15.TabIndex = 3;
             this.label15.Text = "LÜTFEN ŞİFRENİZİ GİRİNİZ :";
             // 
-            // textBox8
+            // button15
             // 
-            this.textBox8.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.textBox8.Location = new System.Drawing.Point(33, 67);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(180, 20);
-            this.textBox8.TabIndex = 21;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label17.Location = new System.Drawing.Point(30, 46);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(101, 16);
-            this.label17.TabIndex = 20;
-            this.label17.Text = "İşlem Tarihi : ";
+            this.button15.Location = new System.Drawing.Point(28, 100);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(198, 43);
+            this.button15.TabIndex = 24;
+            this.button15.Text = "BORÇLU MÜŞTERİ ÖDEME";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // Ana_menu
             // 
@@ -691,8 +682,7 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button button15;
     }
 }
 //deneme 12

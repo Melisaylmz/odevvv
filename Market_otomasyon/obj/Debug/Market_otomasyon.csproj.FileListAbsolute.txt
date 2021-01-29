@@ -547,3 +547,7 @@ C:\Users\mukad\Source\Repos\market-otomasyonu\Market_otomasyon\obj\Debug\Market_
 C:\Users\mukad\Source\Repos\market-otomasyonu\Market_otomasyon\obj\Debug\Market_otomasyon.exe
 C:\Users\mukad\Source\Repos\market-otomasyonu\Market_otomasyon\obj\Debug\Market_otomasyon.pdb
 C:\Users\Lenovo\Source\Repos\market-otomasyonu\Market_otomasyon\obj\Debug\Market_otomasyon.Musteri_Sil.resources
+C:\Users\Lenovo\source\repos\market-otomasyonu\Market_otomasyon\bin\Debug\EntityFramework.dll
+C:\Users\Lenovo\source\repos\market-otomasyonu\Market_otomasyon\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lenovo\source\repos\market-otomasyonu\Market_otomasyon\bin\Debug\EntityFramework.xml
+C:\Users\Lenovo\source\repos\market-otomasyonu\Market_otomasyon\bin\Debug\EntityFramework.SqlServer.xml

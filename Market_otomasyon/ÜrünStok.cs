@@ -65,7 +65,8 @@ namespace Market_otomasyon
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            dataGridView1.Hide();
+            label2.Hide();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 StreamReader oku = new StreamReader(openFileDialog1.FileName);
@@ -133,6 +134,21 @@ namespace Market_otomasyon
                 }
 
             }
+
+        private void ÜrünStok_Load(object sender, EventArgs e)
+        {
+            dataGridView1.Hide();
+            label2.Hide();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Show();
+            label2.Show();
+            MarketDbContext db = new MarketDbContext();
+            var stokbilgi = db.Stoks.ToList();
+            dataGridView1.DataSource = stokbilgi;
+        }
+    }
 }
 

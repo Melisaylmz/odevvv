@@ -1,5 +1,6 @@
 ﻿using Market_otomasyon.Context;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+//using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Market_otomasyon.Moduls.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,21 +41,23 @@ namespace Market_otomasyon
 
         private void button8_Click(object sender, EventArgs e)
         {
-            MarketDbContext db = new MarketDbContext();
             var cntxt = new MarketDbContext();
-            _ = cntxt.PesinSatis.Add(new Moduls.Entity.PesinSatis
+            cntxt.PesinSatis.Add(new PesinSatis
             {
-                Tutar = Convert.ToInt32(textBox2.Text)
+                Tutar = Convert.ToDouble(textBox2.Text)
+
             });
-            var cevap = cntxt.SaveChanges();
-            if (cevap <= 0)
-            {
-                MessageBox.Show("Satın Alma İşlemi Tamamlanamamıştır");
-            }
-            else
-            {
-                MessageBox.Show("Satın Alma İşlemi Tamamlanmıştır");
-            }
+
+              var cevap = cntxt.SaveChanges();
+              if (cevap <= 0)
+              {
+                  MessageBox.Show("Satın Alma İşlemi Tamamlanamamıştır");
+              }
+              else
+              {
+                  MessageBox.Show("Satın Alma İşlemi Tamamlanmıştır");
+              } 
+
 
         }
 
@@ -94,13 +97,13 @@ namespace Market_otomasyon
 
         private void button7_Click(object sender, EventArgs e)
         {
-            var barkodNo = textBox1.Text;
+            string barkodNo = textBox1.Text;
             using (var bb = new MarketDbContext())
             {
                 var urun = bb.Stoks.FirstOrDefault(a => a.Barkod.ToString() == barkodNo);
                 if (urun != null)
                 {
-                    tablo.Rows.Add(urun.UrunKodu, urun.UrunAdi, urun.Cesit, urun.SatisFiyati);
+                    tablo.Rows.Add(urun.Barkod, urun.UrunKodu, urun.UrunAdi, urun.Cesit, urun.SatisFiyati);
                     dataGridView1.DataSource = tablo;
                     tutar += urun.SatisFiyati;
                     textBox2.Text = tutar.ToString();
@@ -121,6 +124,7 @@ namespace Market_otomasyon
             groupBox3.Hide();
             groupBox8.Hide();
             tablo.Columns.Add("Ürün Kodu", typeof(int));
+            tablo.Columns.Add("Barkod No", typeof(int));
             tablo.Columns.Add("Ürün Adı", typeof(string));
             tablo.Columns.Add("Çeşidi", typeof(string));
             tablo.Columns.Add("Fiyatı", typeof(double));
@@ -209,7 +213,7 @@ namespace Market_otomasyon
             }
         }
 
-       
+
 
         private void button13_Click_1(object sender, EventArgs e)
         {
@@ -224,16 +228,17 @@ namespace Market_otomasyon
                     soyadi = deger.MusteriSoyad;
                 }
             }
-            var cntxtt = new MarketDbContext();
-            _ = cntxtt.Borcs.Add(new Moduls.Entity.Borc
+
+            var context = new MarketDbContext();
+            context.Borcs.Add(new Borc
             {
                 MusteriAd = musteriadi,
                 MusteriSoyad = soyadi,
                 MusteriID = Convert.ToInt32(textBox3.Text),
-                Tutar = Convert.ToInt32(textBox2.Text)
+                Tutar = Convert.ToDouble(textBox2.Text)
             });
 
-            var cevap = cntxtt.SaveChanges();
+            var cevap = context.SaveChanges();
             if (cevap <= 0)
             {
                 MessageBox.Show("Satın Alma İşlemi Tamamlanamamıştır");
@@ -242,9 +247,24 @@ namespace Market_otomasyon
             {
                 MessageBox.Show("Satın Alma İşlemi Tamamlanmıştır");
             }
+
+
+
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            Borc bilgi = new Borc();
         
+            MarketDbContext cntxt = new MarketDbContext();
+            int Id = Convert.ToInt32(textBox3.Text);
+            var guncelle = cntxt.Borcs.Where(w => w.BorcID == Id).FirstOrDefault();
+            guncelle.Tutar  += Convert.ToDouble(textBox2.Text);
+                         
+            cntxt.SaveChanges();
+            
+            MessageBox.Show("ödeme gerçekleştirldi");
+        }
     }
-
 }
+

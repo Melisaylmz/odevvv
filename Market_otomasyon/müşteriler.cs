@@ -9,11 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Market_otomasyon
 {
     public partial class müşteriler : Form
     {
+        public object MarketProjeModel { get; private set; }
+
         public müşteriler()
         {
             InitializeComponent();
@@ -28,7 +31,7 @@ namespace Market_otomasyon
         {
             Yeni_Müsteri yenimüsteri = new Yeni_Müsteri();
             yenimüsteri.Show();
-            //this.Hide();
+
         }
 
         private void btnsil_Click(object sender, EventArgs e)
@@ -70,6 +73,7 @@ namespace Market_otomasyon
             MarketDbContext aa = new MarketDbContext();
             var borc = aa.Borcs.ToList();
             dataGridView1.DataSource = borc;
+
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -81,39 +85,43 @@ namespace Market_otomasyon
 
         private void button11_Click(object sender, EventArgs e)
         {
-            int paraüstü;
-            paraüstü = int.Parse(textBox1.Text) - int.Parse(textBox2.Text);
-            textBox3.Text = paraüstü.ToString();
+
+            //double borc = Convert.ToDouble(textBox1.Text);
+           // double odeme = Convert.ToDouble(textBox2.Text);
+           // double kalanborc = borc - odeme;
+            // textBox3.Text = Convert.ToString(kalanborc);
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            textBox1.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            //textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string musteriadi = " ";
-            string soyadi = " ";
-            MarketDbContext db = new MarketDbContext();
-            foreach (var deger in db.Musteris)
-            {
-                if (deger.MusteriID == Convert.ToInt32(textBox4.Text))
-                {
-                    musteriadi = deger.MusteriAd;
-                    soyadi = deger.MusteriSoyad;
-                }
-            }
-            var cntxt = new MarketDbContext();
-            _ = cntxt.Borcs.Add(new Moduls.Entity.Borc
-            {
-                MusteriAd = musteriadi,
-                MusteriSoyad = soyadi,
-                MusteriID = Convert.ToInt32(textBox4.Text),
-                MusteriOdeme = Convert.ToInt32(textBox2.Text),
-                //SatinAlmaTarihi = Convert.ToDateTime(textBox8.Text),
+            Borc bilgi = new Borc();
+           // bilgi.KalanBorc = bilgi.KalanBorcOlustur();
+            MarketDbContext cntxt = new MarketDbContext();
+            int Id = Convert.ToInt32(textBox3.Text);
+            var guncelle = cntxt.Borcs.Where(w => w.BorcID == Id).FirstOrDefault();
+            guncelle.MusteriOdeme += Convert.ToDouble(textBox2.Text);
+            guncelle.KalanBorc = Convert.ToDouble(textBox1.Text);
+               // bilgi.KalanBorc = bilgi.KalanBorcOlustur();               
+                cntxt.SaveChanges();
+            bilgi.KalanBorc = bilgi.KalanBorcOlustur();
+            MessageBox.Show("ödeme gerçekleştirldi");
 
-            });
+
+            /* MarketDbContext cntx = new MarketDbContext();
+             Borc borcMus = new Borc
+             {
+                 MusteriID = Convert.ToInt32(comboBox1.SelectedItem),
+                 MusteriOdeme = Convert.ToInt32(textBox2.Text)
+             };
+             cntx.Borcs.Add(borcMus);
+             cntx.SaveChanges();
+             MessageBox.Show("ödeme gerçekleştirldi"); */
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -123,7 +131,92 @@ namespace Market_otomasyon
 
         private void müşteriler_Load(object sender, EventArgs e)
         {
+           
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+       // static readonly string conString = "Data Source=DESKTOP-S41BM0N;Initial Catalog=MarketProje;Integrated Security=True";
+        //private readonly SqlConnection baglanti = new SqlConnection(conString);
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+
+            /* baglanti.Open();
+             var ad = comboBox1.SelectedItem;
+             string kayit = "SELECT * from Borcs where BorcMusteriID=@BorcMusteriID";
+             SqlCommand komut = new SqlCommand(kayit, baglanti);
+             komut.Parameters.AddWithValue("@BorcMusteriID", comboBox1.SelectedItem);
+
+             SqlDataAdapter da = new SqlDataAdapter(komut);
+             DataTable dt = new DataTable();
+             da.Fill(dt);
+             dataGridView1.DataSource = dt;
+             baglanti.Close();
+             //
+             SqlConnection baglanti3 = new SqlConnection
+             {
+                 ConnectionString = @"Data Source=DESKTOP-S41BM0N;Initial Catalog=MarketProje;Integrated Security=True"
+             };
+             baglanti3.Open();
+             string kayit2 = "SELECT KalanBorc from Borcs where BorcMusteriID=@BorcMusteriID";
+             SqlCommand komut3 = new SqlCommand(kayit2, baglanti3);
+             komut3.Parameters.AddWithValue("@BorcMusteriID", comboBox1.SelectedItem);
+
+             DataTable dt2 = new DataTable();
+             SqlDataAdapter da2 = new SqlDataAdapter(komut3);
+             da2.Fill(dt2);
+             int total = 0;
+             textBox1.Clear();
+
+             foreach (DataRow dre in dt2.Rows)
+             {
+                 total = total + Convert.ToInt32(dre["KalanBorc"].ToString());
+
+
+                 textBox1.Text = Convert.ToString(total);
+             }
+             baglanti3.Close();
+         } */
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+          
+            textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            var context = new MarketDbContext();
+            var cevap = context.Borcs.Where(i => i.KalanBorc == 0).FirstOrDefault();
+            if (cevap != null)
+            {
+                textBox4.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            }
+            else
+            {
+                textBox4.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+            }
+
+            //textBox4.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            //textBox5.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+
+
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+         
+
+            double para;
+            para = double.Parse(textBox4.Text) - double.Parse(textBox2.Text);
+            textBox1.Text = para.ToString();
         }
     }
-}
 
+}

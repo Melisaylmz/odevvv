@@ -17,6 +17,12 @@ namespace Market_otomasyon.Moduls.Entity
         public DateTime SatinAlmaTarihi { get; set; } = DateTime.Now;
         public double MusteriOdeme { get; set; }
         //public double ToplamBorc{ get; set; }
+        public double KalanBorc { get; set; }
 
+        public double KalanBorcOlustur()
+        {
+            KalanBorc = Tutar - MusteriOdeme;
+            return KalanBorc;
+        }
     }
 }

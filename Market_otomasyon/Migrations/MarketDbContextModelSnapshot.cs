@@ -26,6 +26,9 @@ namespace Market_otomasyon.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("KalanBorc")
+                        .HasColumnType("float");
+
                     b.Property<string>("MusteriAd")
                         .HasColumnType("nvarchar(max)");
 
